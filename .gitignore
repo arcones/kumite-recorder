@@ -9,4 +9,4 @@
 *.tfstate.*
 
 # Credentials file
-IAC/credentials.csv
+IAC/credentials*.csv
