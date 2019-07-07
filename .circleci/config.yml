@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   build:
-    working_directory: ~/kumite/IAC
+    working_directory: ~/kumite
 
     docker:
       - image: circleci/python:latest
@@ -10,10 +10,10 @@ jobs:
       - checkout
       - run:
           name: Prepare environment
-          command: ls && wget https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip && unzip terraform_0.12.3_linux_amd64.zip
+          command: cd ./IAC && wget https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip && unzip terraform_0.12.3_linux_amd64.zip
       - run:
           name: Initialize terraform
-          command: ./terraform init
+          command: cd ./IAC && ./terraform init
       - run:
           name: Deploy infrastructure
-          command: ./terraform apply --auto-approve
+          command: cd ./IAC && ./terraform apply --auto-approve
