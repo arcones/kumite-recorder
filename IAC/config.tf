@@ -20,4 +20,7 @@ resource aws_s3_bucket kumite_state {
   lifecycle {
     prevent_destroy = true
   }
+  tags = {
+    Application = "kumite-recorder"
+  }
 }
