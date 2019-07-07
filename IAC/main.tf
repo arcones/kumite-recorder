@@ -3,6 +3,6 @@ variable region {
 }
 
 module modules {
-  source          = "./modules"
-  region          = "${var.region}"
+  source = "./modules"
+  region = "${var.region}"
 }

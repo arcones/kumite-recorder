@@ -2,12 +2,12 @@ module dynamo {
   source          = "./dynamo"
 }
 
-//module lambda {
-//  source                     = "./lambda"
+module lambda {
+  source                     = "./lambda"
 //  region                     = "${var.region}"
 //  rds-outputs                = "${module.rds.output}"
 //  apigateway-general-outputs = "${module.apigateway.general-output}"
-//}
+}
 //
 //module apigateway {
 //  source                  = "./apigateway"
