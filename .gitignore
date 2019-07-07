@@ -1,0 +1,12 @@
+# IDE specific files
+.idea
+
+# Local .terraform directories
+**/.terraform/*
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Credentials file
+IAC/credentials.csv
