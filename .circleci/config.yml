@@ -14,3 +14,6 @@ jobs:
       - run:
           name: Initialize terraform
           command: cd ./IAC && ./terraform init
+      - run:
+          name: Deploy infrastructure
+          command: cd ./IAC && ./terraform apply --auto-approve
