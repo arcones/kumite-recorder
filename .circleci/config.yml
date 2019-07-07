@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run:
           name: Prepare environment
-          command: wget https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip && unzip terraform_0.12.3_linux_amd64.zip
+          command: ls && wget https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip && unzip terraform_0.12.3_linux_amd64.zip
       - run:
           name: Initialize terraform
           command: ./terraform init
