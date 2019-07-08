@@ -4,7 +4,7 @@ resource aws_lambda_function kumite_writer {
   role = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
   handler = "exports.test"
 
-  source_code_hash = filebase64sha256("${path.module}/payload.py")
+  source_code_hash = filebase64sha256("${path.cwd}/${path.module}/payload.py")
 
   runtime = "python3.7"
 
