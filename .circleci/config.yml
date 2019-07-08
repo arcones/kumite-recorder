@@ -11,7 +11,7 @@ jobs:
           name: Prepare environment
           command: >-
             mkdir ~/.aws &&
-            echo -e "[kumite-recorder]\naws_access_key_id=$AWS_ACCESS_KEY_ID_PROD\naws_secret_access_key=$AWS_SECRET_ACCESS_KEY_PROD\n" > ~/.aws/credentials &&
+            echo -e "[kumite-recorder]\naws_access_key_id=$AWS_ACCESS_KEY_ID\naws_secret_access_key=$AWS_SECRET_ACCESS_KEY\n" > ~/.aws/credentials &&
             cd ./IAC && wget https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip && unzip terraform_0.12.3_linux_amd64.zip
       - run:
           name: Initialize terraform
