@@ -1,19 +1,20 @@
 terraform {
   backend s3 {
-    bucket  = "kumite-state"
+    bucket  = "kumite-recorder"
     region  = "eu-central-1"
-    key     = "kumite-recorder/global/s3/terraform.tfstate"
+    key     = "IAC/terraform.tfstate"
     encrypt = true
+    profile = "kumite-recorder"
   }
 }
 
 provider aws {
   region = "eu-central-1"
-  //TODO pending to use specific profile
+  profile = "kumite-recorder"
 }
 
 resource aws_iam_user kumite_user {
-  name = "kumite"
+  name = "kumite-recorder"
   path = "/"
 
   tags = {
@@ -36,8 +37,8 @@ resource aws_iam_user_policy_attachment kumite_dynamo_policy {
   policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
 }
 
-resource aws_s3_bucket kumite_state {
-  bucket = "kumite-state"
+resource aws_s3_bucket kumite_recorder {
+  bucket = "kumite-recorder"
   versioning {
     enabled = true
   }
