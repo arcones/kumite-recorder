@@ -6,3 +6,6 @@
 
 # Terraform state files
 *.tfstate.*
+
+# Code packages
+IAC/modules/lambda/payload.zip
