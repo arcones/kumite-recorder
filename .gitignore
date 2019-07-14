@@ -5,8 +5,7 @@
 **/.terraform/*
 
 # Terraform state files
-*.tfstate
 *.tfstate.*
 
-# Credentials file
-IAC/credentials*.csv
+# Code package
+IAC/modules/lambda/payload.zip

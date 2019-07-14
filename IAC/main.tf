@@ -41,5 +41,5 @@ resource aws_s3_bucket kumite_recorder {
 
 module modules {
   source = "./modules"
-  region = "${var.region}"
+  region = var.region
 }

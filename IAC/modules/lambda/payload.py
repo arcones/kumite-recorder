@@ -1,1 +1,2 @@
-print("Hello from lambda")
+def handler(event, context):
+    print("Hello from lambda")
