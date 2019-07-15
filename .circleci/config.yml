@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Prepare environment
-          command: cd ./IAC && wget https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip && unzip terraform_0.12.3_linux_amd64.zip
+          command: cd ./IAC && wget https://releases.hashicorp.com/terraform/0.12.4/terraform_0.12.4_linux_amd64.zip && unzip terraform_0.12.4_linux_amd64.zip
       - run:
           name: Initialize terraform
           command: cd ./IAC && ./terraform init -backend-config="profile=default"
