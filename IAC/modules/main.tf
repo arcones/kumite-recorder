@@ -4,9 +4,6 @@ module dynamo {
 
 module lambda {
   source = "./lambda"
-  //  region                     = "${var.region}"
-  //  rds-outputs                = "${module.rds.output}"
-  //  apigateway-general-outputs = "${module.apigateway.general-output}"
 }
 
 module apigateway {
@@ -15,6 +12,8 @@ module apigateway {
 }
 
 module route53 {
-  source                      = "./route53"
+  source = "./route53"
   api-gateway-domain-name = module.apigateway.apigateway_domain_name
+  api-gateway-regional-domain-name = module.apigateway.apigateway_regional_domain_name
+  api-gateway-regional-zone-id = module.apigateway.apigateway_regional_zone_id
 }
