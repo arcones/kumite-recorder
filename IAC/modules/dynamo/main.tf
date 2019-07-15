@@ -1,5 +1,5 @@
 resource aws_dynamodb_table kumite_records {
-  name           = "KumiteRecords"
+  name           = "Exchange"
   billing_mode   = "PAY_PER_REQUEST"
   hash_key       = "Id"
   range_key = "Timestamp"

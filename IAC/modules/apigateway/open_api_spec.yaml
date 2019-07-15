@@ -1,0 +1,59 @@
+openapi: 3.0.0
+servers:
+  - url: "kumiterecorder.net"
+info:
+  description: "[https://github.com/arcones/kumite-recorder](https://github.com/arcones/kumite-recorder)"
+  version: "1.0.0"
+  title: Kumite Recorder
+  contact:
+    email: marta.arcones@gmail.com
+tags:
+  - name: exchange
+paths:
+  /exchange:
+    post:
+      tags:
+        - exchange
+      responses:
+        '200':
+          description: Exchange successfully saved
+      requestBody:
+        $ref: '#/components/requestBodies/Exchange'
+components:
+  schemas:
+    Exchange:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        request:
+          $ref: '#/components/schemas/Request'
+        response:
+          $ref: '#/components/schemas/Response'
+    Request:
+          type: object
+          properties:
+            path:
+              type: string
+              example: cats
+            method:
+              type: string
+              enum:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              example: GET
+    Response:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+  requestBodies:
+    Exchange:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Exchange'

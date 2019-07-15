@@ -1,0 +1,1 @@
+variable lambda_writer_arn {}
