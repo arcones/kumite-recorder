@@ -6,7 +6,7 @@ def handler(event, context):
     dynamodb = boto3.client('dynamodb')
     dynamodb.put_item(TableName='Exchange',
                       Item={
-                          'Id': time.time(),
+                          'Id': int(time.time()),
                           'Request': {
                               'Path': 'cats',
                               'Method': 'GET'
