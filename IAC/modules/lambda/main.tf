@@ -17,14 +17,16 @@ resource aws_iam_role kumite_writer_lambda_role {
   }
 }
 
-resource aws_iam_role_policy_attachment kumite_writer_lambda_policy {
-  role       = aws_iam_role.kumite_writer_lambda_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+variable "iam_policy_arn" {
+  description = "IAM Policy to be attached to role"
+  type = "list"
+  default = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",  "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
 }
 
 resource aws_iam_role_policy_attachment kumite_writer_lambda_policy {
   role       = aws_iam_role.kumite_writer_lambda_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+  count      = length(var.iam_policy_arn)
+  policy_arn = var.iam_policy_arn[count.index]
 }
 
 data archive_file lambda_payload {
