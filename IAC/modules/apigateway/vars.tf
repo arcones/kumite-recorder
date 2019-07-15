@@ -1,2 +1,2 @@
-variable lambda_writer_arn {}
-variable certificate_arn {}
+variable lambda_invoke_arn {}
+variable lambda_arn {}

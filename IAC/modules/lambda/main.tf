@@ -10,16 +10,16 @@ data aws_iam_policy_document lambda_assume_role_policy {
 }
 
 resource aws_iam_role kumite_writer_lambda_role {
-  name        = "kumite_writer_lambda_role"
-  assume_role_policy ="${data.aws_iam_policy_document.lambda_assume_role_policy.json}"
+  name               = "kumite_writer_lambda_role"
+  assume_role_policy = "${data.aws_iam_policy_document.lambda_assume_role_policy.json}"
   tags = {
     Application = "kumite-recorder"
   }
 }
 
 variable "iam_policy_arn" {
-  type = "list"
-  default = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",  "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
+  type    = "list"
+  default = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole", "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
 }
 
 resource aws_iam_role_policy_attachment kumite_writer_lambda_policy {
@@ -35,10 +35,10 @@ data archive_file lambda_payload {
 }
 
 resource aws_lambda_function kumite_writer {
-  filename = data.archive_file.lambda_payload.output_path
+  filename      = data.archive_file.lambda_payload.output_path
   function_name = "kumite-writer"
-  role = aws_iam_role.kumite_writer_lambda_role.arn
-  handler = "payload.handler"
+  role          = aws_iam_role.kumite_writer_lambda_role.arn
+  handler       = "payload.handler"
 
   source_code_hash = data.archive_file.lambda_payload.output_base64sha256
 

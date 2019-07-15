@@ -1,54 +1,66 @@
-data template_file open_api_spec {
-  template = file("${path.cwd}/${path.module}/open_api_spec.yaml")
-
-//  vars = {
-//    LAMBDA_ARN     = var.lambda_writer_arn
-//  }
-}
-
 resource aws_api_gateway_rest_api kumite_writer_api {
   name = "kumite_writer_api"
-
-  endpoint_configuration {
-    types = ["REGIONAL"]
-  }
-
-  body = data.template_file.open_api_spec.rendered
 }
 
-resource aws_api_gateway_stage stage {
-  stage_name    = "v1"
-  rest_api_id   = aws_api_gateway_rest_api.kumite_writer_api.id
-  deployment_id = aws_api_gateway_deployment.deployment.id
+resource aws_api_gateway_resource proxy {
+  rest_api_id = aws_api_gateway_rest_api.kumite_writer_api.id
+  parent_id = aws_api_gateway_rest_api.kumite_writer_api.root_resource_id
+  path_part = "{proxy+}"
 }
 
-resource aws_api_gateway_domain_name domain_name {
-  domain_name = "kumiterecorder.net"
-  regional_certificate_arn = var.certificate_arn
+resource aws_api_gateway_method proxy {
+  rest_api_id = aws_api_gateway_rest_api.kumite_writer_api.id
+  resource_id = aws_api_gateway_resource.proxy.id
+  http_method = "ANY"
+  authorization = "NONE"
+}
 
-  endpoint_configuration {
-    types = ["REGIONAL"]
-  }
+resource aws_api_gateway_integration lambda {
+  rest_api_id = aws_api_gateway_rest_api.kumite_writer_api.id
+  resource_id = aws_api_gateway_method.proxy.resource_id
+  http_method = aws_api_gateway_method.proxy.http_method
+
+  integration_http_method = "POST"
+  type = "AWS_PROXY"
+  uri = var.lambda_invoke_arn
+}
+
+resource aws_api_gateway_method proxy_root {
+  rest_api_id = aws_api_gateway_rest_api.kumite_writer_api.id
+  resource_id = aws_api_gateway_rest_api.kumite_writer_api.root_resource_id
+  http_method = "ANY"
+  authorization = "NONE"
+}
+
+resource aws_api_gateway_integration lambda_root {
+  rest_api_id = aws_api_gateway_rest_api.kumite_writer_api.id
+  resource_id = aws_api_gateway_method.proxy_root.resource_id
+  http_method = aws_api_gateway_method.proxy_root.http_method
+
+  integration_http_method = "POST"
+  type = "AWS_PROXY"
+  uri = var.lambda_invoke_arn
 }
 
 resource aws_api_gateway_deployment deployment {
+  depends_on = [
+    "aws_api_gateway_integration.lambda",
+    "aws_api_gateway_integration.lambda_root",
+  ]
+
   rest_api_id = aws_api_gateway_rest_api.kumite_writer_api.id
-  stage_name  = "v1"
-
-  variables = {
-    etag = filemd5("${path.cwd}/${path.module}/open_api_spec.yaml")
-  }
+  stage_name = "v1"
 }
 
-resource aws_api_gateway_stage stage {
-  stage_name            = "v1"
-  rest_api_id           = aws_api_gateway_rest_api.kumite_writer_api.id
-  deployment_id         = aws_api_gateway_deployment.deployment.id
-  cache_cluster_enabled = false
+resource aws_lambda_permission lambda_permission {
+  statement_id = "AllowAPIGatewayInvoke"
+  action = "lambda:InvokeFunction"
+  function_name = var.lambda_arn
+  principal = "apigateway.amazonaws.com"
 
-  tags = {
-    Application = "kumite-recorder"
-  }
+  source_arn = "${aws_api_gateway_deployment.deployment.execution_arn}/*/*"
 }
+
 
 //TODO poner order con el lio de guiones bajos, altos y demas!!
+//TODO si el yaml al final no hace falta... borrarlo! y hacer limpieza de todo lo demas tb!!!
