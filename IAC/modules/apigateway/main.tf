@@ -16,8 +16,19 @@ resource aws_api_gateway_rest_api kumite_writer_api {
   body = data.template_file.open_api_spec.rendered
 }
 
+resource aws_api_gateway_stage stage {
+  stage_name    = "v1"
+  rest_api_id   = aws_api_gateway_rest_api.kumite_writer_api.id
+  deployment_id = aws_api_gateway_deployment.deployment.id
+}
+
 resource aws_api_gateway_domain_name domain_name {
   domain_name = "kumiterecorder.net"
+  regional_certificate_arn = var.certificate_arn
+
+  endpoint_configuration {
+    types = ["REGIONAL"]
+  }
 }
 
 resource aws_api_gateway_deployment deployment {
@@ -39,6 +50,5 @@ resource aws_api_gateway_stage stage {
     Application = "kumite-recorder"
   }
 }
-
 
 //TODO poner order con el lio de guiones bajos, altos y demas!!
