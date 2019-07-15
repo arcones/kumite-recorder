@@ -12,7 +12,7 @@ data aws_iam_policy_document lambda_assume_role_policy {
 resource aws_iam_role kumite_writer_lambda_role {
   name        = "kumite_writer_lambda_role"
   assume_role_policy ="${data.aws_iam_policy_document.lambda_assume_role_policy.json}"
-  tags {
+  tags = {
     Application = "kumite-recorder"
   }
 }
