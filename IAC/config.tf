@@ -4,11 +4,11 @@ terraform {
     region  = "eu-central-1"
     key     = "IAC/terraform.tfstate"
     encrypt = true
-    profile = "kumite-recorder"
+    profile = "kumite"
   }
 }
 
 provider aws {
   region = "eu-central-1"
-  profile = "kumite-recorder"
+  profile = "kumite"
 }

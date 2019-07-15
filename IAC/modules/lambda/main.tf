@@ -11,9 +11,20 @@ data aws_iam_policy_document lambda_assume_role_policy {
 
 resource aws_iam_role kumite_writer_lambda_role {
   name        = "kumite_writer_lambda_role"
-  path        = "/"
-
   assume_role_policy ="${data.aws_iam_policy_document.lambda_assume_role_policy.json}"
+  tags {
+    Application = "kumite-recorder"
+  }
+}
+
+resource aws_iam_role_policy_attachment kumite_writer_lambda_policy {
+  role       = aws_iam_role.kumite_writer_lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource aws_iam_role_policy_attachment kumite_writer_lambda_policy {
+  role       = aws_iam_role.kumite_writer_lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
 }
 
 data archive_file lambda_payload {
