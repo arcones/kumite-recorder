@@ -2,6 +2,8 @@ import boto3
 import time
 import logging
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def handler(event, context):
     path, method, status = get_parameters(event)
