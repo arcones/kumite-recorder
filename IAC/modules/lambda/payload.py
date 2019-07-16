@@ -6,6 +6,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def handler(event, context):
+    logger.info("{}".format(event))
     path, method, status = get_parameters(event)
 
 
@@ -15,13 +16,13 @@ def handler(event, context):
                           "Id": {"N": str(int(time.time()))},
                           "Request":
                               {"M": {
-                                  "Path": {"S": "cats"},
-                                  "Method": {"S": "GET"}
+                                  "Path": {"S": path},
+                                  "Method": {"S": method}
                               }
                               },
                           "Response":
                               {"M": {
-                                  "Status": {"N": "200"}
+                                  "Status": {"N": str(status)}
                               }
                               }
                       })
