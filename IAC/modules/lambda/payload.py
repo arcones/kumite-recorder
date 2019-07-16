@@ -7,11 +7,15 @@ def handler(event, context):
     dynamodb.put_item(TableName='Exchange',
                       Item={
                           "Id": {"N": str(int(time.time()))},
-                          "Request": {
-                              "Path": {"S": "cats"},
-                              "Method": {"S": "GET"}
-                          },
-                          "Response": {
-                              "Status": {"N": "200"}
-                          }
+                          "Request":
+                              {"M": {
+                                  "Path": {"S": "cats"},
+                                  "Method": {"S": "GET"}
+                              }
+                              },
+                          "Response":
+                              {"M": {
+                                  "Status": {"N": "200"}
+                              }
+                              }
                       })
