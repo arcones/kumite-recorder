@@ -9,9 +9,9 @@ def handler(event, context):
                           "Id": {"N": "int(time.time())"},
                           "Request": {
                               "Path": {"S": "cats"},
-                              "Method": {"S", "GET"}
+                              "Method": {"S": "GET"}
                           },
                           "Response": {
-                              "Status": {"N", "200"}
+                              "Status": {"N": "200"}
                           }
                       })
