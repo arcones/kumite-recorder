@@ -38,4 +38,9 @@ def handler(event, context):##Si no estoy usando el contexto, igual se puede bor
                               }
                               }
                       })
-    return 200
+
+    response = {
+        "statusCode": 200
+    }
+
+    return response
