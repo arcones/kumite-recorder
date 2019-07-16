@@ -6,7 +6,6 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def handler(event, context):
-    logger.info("{}".format(event))
     path, method, status = get_parameters(event)
 
 
@@ -29,9 +28,11 @@ def handler(event, context):
 
 
 def get_parameters(event):
-    logger.info("body: : {}".format(event.body))
-    body = event.body
-    path = body.path
-    method = body.method
-    status = body.status
+    logger.info("{}".format(event))
+    path = event.path
+    method = event.method
+    status = event.status
+    logger.info("path: : {}".format(path))
+    logger.info("method: : {}".format(method))
+    logger.info("status: : {}".format(status))
     return (path, method, status)
