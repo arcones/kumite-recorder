@@ -6,8 +6,9 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def handler(event, context):
-    path, method, status = get_parameters(event)
-
+    path = event["path"]
+    method = event["method"]
+    status = event["status"]
 
     dynamodb = boto3.client('dynamodb')
     dynamodb.put_item(TableName='Exchange',
@@ -25,14 +26,4 @@ def handler(event, context):
                               }
                               }
                       })
-
-
-def get_parameters(event):
-    logger.info("{}".format(event))
-    path = event.path
-    method = event.method
-    status = event.status
-    logger.info("path: : {}".format(path))
-    logger.info("method: : {}".format(method))
-    logger.info("status: : {}".format(status))
-    return (path, method, status)
+    return 200
