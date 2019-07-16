@@ -17,7 +17,7 @@ resource aws_iam_role kumite_writer_lambda_role {
   }
 }
 
-variable "iam_policy_arn" {
+variable iam_policy_arn {
   type    = "list"
   default = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole", "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
 }

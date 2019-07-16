@@ -52,13 +52,12 @@ resource aws_api_gateway_deployment deployment {
   stage_name = "v1"
 }
 
-resource aws_lambda_permission lambda_permission {
-  statement_id = "AllowAPIGatewayInvoke"
+resource aws_lambda_permission lambda_permission {//TODO mover a donde la lambda... es su dominio
   action = "lambda:InvokeFunction"
-  function_name = var.lambda_arn
+  function_name = var.lambda_function_name
   principal = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_api_gateway_deployment.deployment.execution_arn}/*/*"
+  source_arn = "${aws_api_gateway_rest_api.kumite_writer_api.execution_arn}/*/*/*"
 }
 
 
