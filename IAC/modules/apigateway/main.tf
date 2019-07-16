@@ -51,15 +51,3 @@ resource aws_api_gateway_deployment deployment {
   rest_api_id = aws_api_gateway_rest_api.kumite_writer_api.id
   stage_name = "v1"
 }
-
-resource aws_lambda_permission lambda_permission {//TODO mover a donde la lambda... es su dominio
-  action = "lambda:InvokeFunction"
-  function_name = var.lambda_function_name
-  principal = "apigateway.amazonaws.com"
-
-  source_arn = "${aws_api_gateway_rest_api.kumite_writer_api.execution_arn}/*/*/*"
-}
-
-
-//TODO poner order con el lio de guiones bajos, altos y demas!!
-//TODO si el yaml al final no hace falta... borrarlo! y hacer limpieza de todo lo demas tb!!!

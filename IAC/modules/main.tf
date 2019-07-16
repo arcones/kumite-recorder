@@ -4,6 +4,7 @@ module dynamo {
 
 module lambda {
   source = "./lambda"
+  apigateway_execution_arn = module.apigateway.apigateway_execution_arn
 }
 
 module apigateway {

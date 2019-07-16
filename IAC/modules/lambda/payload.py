@@ -6,7 +6,7 @@ import json
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-def handler(event, context):##Si no estoy usando el contexto, igual se puede borrar
+def handler(event, context):
     logger.info("The event is {}".format(event))
     logger.info("The event's body is {}".format(event["body"]))
 

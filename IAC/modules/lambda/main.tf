@@ -48,3 +48,11 @@ resource aws_lambda_function kumite_writer {
     Application = "kumite-recorder"
   }
 }
+
+resource aws_lambda_permission lambda_permission {
+  action = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.kumite_writer.function_name
+  principal = "apigateway.amazonaws.com"
+
+  source_arn = "${var.apigateway_execution_arn}/*/*/*"
+}
