@@ -2,6 +2,11 @@ resource aws_api_gateway_rest_api kumite_writer_api {
   name = "kumite_writer_api"
 }
 
+resource aws_api_gateway_domain_name example {
+  certificate_arn = var.domain_arn
+  domain_name     = "kumiterecorder.net"
+}
+
 resource aws_api_gateway_resource proxy {
   rest_api_id = aws_api_gateway_rest_api.kumite_writer_api.id
   parent_id = aws_api_gateway_rest_api.kumite_writer_api.root_resource_id

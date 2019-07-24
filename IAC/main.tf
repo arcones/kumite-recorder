@@ -16,5 +16,5 @@ resource aws_s3_bucket kumite_recorder {
 }
 
 module modules {
-  source = "./modules"
+  source   = "./modules"
 }
