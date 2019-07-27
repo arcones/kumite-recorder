@@ -1,4 +1,4 @@
-output domain_arn {
+output certificate_domain_arn {
   value = aws_acm_certificate.certificate.arn
 }
 

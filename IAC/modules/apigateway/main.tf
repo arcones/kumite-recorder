@@ -1,10 +1,16 @@
 resource aws_api_gateway_rest_api kumite_writer_api {
   name = "kumite_writer_api"
+  endpoint_configuration {
+    types = ["REGIONAL"]
+  }
 }
 
-resource aws_api_gateway_domain_name example {
-  certificate_arn = var.domain_arn
-  domain_name     = "kumiterecorder.net"
+resource aws_api_gateway_domain_name domain_name {
+  certificate_arn = var.certificate_domain_arn
+  domain_name     = "recorder.kumite.xyz"
+  endpoint_configuration {
+    types = ["REGIONAL"]
+  }
 }
 
 resource aws_api_gateway_resource proxy {
