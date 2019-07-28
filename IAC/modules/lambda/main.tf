@@ -11,7 +11,7 @@ data aws_iam_policy_document lambda_assume_role_policy {
 
 resource aws_iam_role kumite_writer_lambda_role {
   name               = "kumite_writer_lambda_role"
-  assume_role_policy = "${data.aws_iam_policy_document.lambda_assume_role_policy.json}"
+  assume_role_policy = data.aws_iam_policy_document.lambda_assume_role_policy.json
   tags = {
     Application = "kumite-recorder"
   }
@@ -30,7 +30,7 @@ resource aws_iam_role_policy_attachment kumite_writer_lambda_policy {
 
 data archive_file lambda_payload {
   type        = "zip"
-  source_file = "${path.cwd}/${path.module}/payload.py"
+  source_file = "${path.cwd}/${path.module}/payload.py"//TODO cambiar esto a ruta relativa para que CircleCI no vuelva a ejecutar
   output_path = "${path.cwd}/${path.module}/payload.zip"
 }
 

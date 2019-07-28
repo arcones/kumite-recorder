@@ -1,5 +1,5 @@
-variable certificate_domain_arn {}
-variable domain_validation_options {}
 variable apigateway_domain_name {}
-variable apigateway_regional_domain_name {}
-variable apigateway_regional_zone_id {}
+variable apigateway_zone_id {}
+variable validation_record_name {}
+variable validation_record_type {}
+variable validation_record_value {}

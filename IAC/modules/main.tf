@@ -17,11 +17,11 @@ module apigateway {
 
 module route53 {
   source = "./route53"
-  domain_validation_options = module.acm.domain_validation_options
-  certificate_domain_arn = module.acm.certificate_domain_arn
+  validation_record_name = module.acm.validation_record_name
+  validation_record_type = module.acm.validation_record_type
+  validation_record_value = module.acm.validation_record_value
   apigateway_domain_name = module.apigateway.apigateway_domain_name
-  apigateway_regional_domain_name = module.apigateway.apigateway_regional_domain_name
-  apigateway_regional_zone_id = module.apigateway.apigateway_regional_zone_id
+  apigateway_zone_id = module.apigateway.apigateway_zone_id
 }
 
 module acm {
