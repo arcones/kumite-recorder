@@ -1,5 +1,9 @@
 variable apigateway_domain_name {}
+variable apigateway_regional_domain_name {}
 variable apigateway_zone_id {}
-variable validation_record_name {}
-variable validation_record_type {}
-variable validation_record_value {}
+variable validation_record_name_0 {}
+variable validation_record_type_0 {}
+variable validation_record_value_0 {}
+variable validation_record_name_1 {}
+variable validation_record_type_1 {}
+variable validation_record_value_1 {}

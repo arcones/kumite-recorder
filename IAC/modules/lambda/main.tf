@@ -30,8 +30,8 @@ resource aws_iam_role_policy_attachment kumite_writer_lambda_policy {
 
 data archive_file lambda_payload {
   type        = "zip"
-  source_file = "${path.cwd}/${path.module}/payload.py"//TODO cambiar esto a ruta relativa para que CircleCI no vuelva a ejecutar
-  output_path = "${path.cwd}/${path.module}/payload.zip"
+  source_file = "${path.module}/payload.py"
+  output_path = "${path.module}/payload.zip"
 }
 
 resource aws_lambda_function kumite_writer {
